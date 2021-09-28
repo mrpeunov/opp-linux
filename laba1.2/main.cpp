@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include <unistd.h>
-#include <sys/types.h>
 #include <string>
 using namespace std;
 
@@ -25,60 +24,7 @@ void output_in_file(const string& process_name){
     file.close();
 }
 
-void main_process(){
-    sleep(1);
-    output_in_file("Родитель");
-    sleep(10);
-}
-
-void child1_process(){
-    sleep(5);
-    output_in_file("Потомок 1");
-}
-
-void child2_process(){
-    sleep(10);
-    const char *child2_program_path = "/home/peunov/highschool/opp-linux/laba1.2/cmake-build-debug/laba1_2";
-    output_in_file("Потомок 2");
-    execlp(child2_program_path, NULL);
-}
-
-int error(){
-    cout << "При создании процесса произошла ошибка";
-    return 1;
-}
-
-int spawning_processes(){
-    pid_t fork_process_id = fork();
-
-    if(fork_process_id == -1){
-        return error();
-    }
-
-    if(fork_process_id > 0){
-        child1_process();
-    }
-
-    if(fork_process_id == 0){
-        pid_t vfork_process_id = vfork();
-
-        if(vfork_process_id == -1){
-            return error();
-        }
-
-        if(vfork_process_id > 0){
-            child2_process();
-        }
-
-        if(vfork_process_id == 0){
-            main_process();
-        }
-    }
-
-    return 0;
-}
-
 int main(){
-    cout << "Лабораторная работа №3" << endl;
-    return spawning_processes();
+    output_in_file("Процесс из другово файла");
+    return 0;
 }
