@@ -22,9 +22,10 @@ void output_in_file(const string& process_name){
     }
 
     file.close();
+    exit(EXIT_SUCCESS);
 }
 
 int main(){
-    output_in_file("Процесс из другово файла");
+    output_in_file("Процесс из другого файла");
     return 0;
 }

@@ -3,6 +3,8 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <string>
+#include <sys/wait.h>
+
 using namespace std;
 
 void output_in_file(const string& process_name){
@@ -26,18 +28,14 @@ void output_in_file(const string& process_name){
 }
 
 void main_process(){
-    sleep(1);
     output_in_file("Родитель");
-    sleep(10);
 }
 
 void child1_process(){
-    sleep(5);
     output_in_file("Потомок 1");
 }
 
 void child2_process(){
-    sleep(10);
     const char *child2_program_path = "/home/peunov/highschool/opp-linux/laba1.2/cmake-build-debug/laba1_2";
     output_in_file("Потомок 2");
     execlp(child2_program_path, NULL);
@@ -56,6 +54,7 @@ int spawning_processes(){
     }
 
     if(fork_process_id > 0){
+        sleep(5);
         child1_process();
     }
 
@@ -67,10 +66,14 @@ int spawning_processes(){
         }
 
         if(vfork_process_id > 0){
+            sleep(3);
             child2_process();
         }
 
         if(vfork_process_id == 0){
+            sleep(10);
+            int status;
+            wait(&status);
             main_process();
         }
     }
@@ -82,3 +85,5 @@ int main(){
     cout << "Лабораторная работа №3" << endl;
     return spawning_processes();
 }
+
+
