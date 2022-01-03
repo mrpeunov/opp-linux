@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/peunov/highschool/opp-linux/lr9/main/main.cpp
+sys/types.h
+-
+sys/ipc.h
+-
+sys/shm.h
+-
+sys/time.h
+-
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+time.h
+-
+signal.h
+-
+iostream
+-
+fstream
+-
+

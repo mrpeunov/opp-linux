@@ -6,13 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/peunov/highschool/opp-linux/laba1.2/main.cpp
-iostream
--
-fstream
--
-unistd.h
--
+/home/peunov/highschool/opp-linux/lr3/laba1.2/main.cpp
 string
 -
 

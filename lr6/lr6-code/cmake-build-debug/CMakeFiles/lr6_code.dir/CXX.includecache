@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/peunov/highschool/opp-linux/lr6/lr6-code/main.cpp
+ctime
+-
+iostream
+-
+sys/wait.h
+-
+cstdio
+-
+cstdlib
+-
+unistd.h
+-
+csignal
+-
+sys/time.h
+-
+

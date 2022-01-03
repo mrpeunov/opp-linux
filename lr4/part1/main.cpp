@@ -77,7 +77,7 @@ void* threadFunction(void* arg){
     printFileContain(handle, "Дочерний поток");
 
     // Поток закрывает файл (опционально)
-    //closeFile(handle, "Дочерний поток");
+    closeFile(handle, "Дочерний поток");
 
     pthread_exit(nullptr);
 }

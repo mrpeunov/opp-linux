@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/lr6_code.dir/main.cpp.o -o lr6_code 

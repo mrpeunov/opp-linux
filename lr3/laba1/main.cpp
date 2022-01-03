@@ -1,64 +1,42 @@
 #include <iostream>
 #include <fstream>
 #include <unistd.h>
-#include <sys/types.h>
 #include <string>
-#include <sys/wait.h>
 
 using namespace std;
 
-void output_in_file(const string& process_name){
-    string file_path = "/home/peunov/highschool/opp-linux/output/output.txt";
-    ofstream file;
-    file.open(file_path, ios::app);
+int mainStop = 10;
+int childFirstStop = 5;
+int childSecondStop = 3;
+const char *childFirstProgramPath = "/home/peunov/highschool/opp-linux/laba1.2/cmake-build-debug/laba1_2";
 
-    if (file.is_open()) {
-        pid_t process_id = getpid();
-        file << process_name << " - идентификатор процесса: " <<  process_id << endl;
-        file << process_name << " - идентификатор предка: " << getppid() << endl;
-        file << process_name << " - идентификатор сессии процесса: " << getsid(process_id) << endl;
-        file << process_name << " - идентификатор группы процессов: " << getpgid(process_id) << endl;
-        file << process_name << " - реальный идентификатор пользователя: " << getuid() << endl;
-        file << process_name << " - эффективный идентификатор пользователя: " << geteuid() << endl;
-        file << process_name << " - реальный групповой идентификатор: " << getgid() << endl;
-        file << process_name << " - эффективный групповой идентификатор: " << getegid() << endl;
+
+void outputInFile(string processName, string filePath, int stop);
+int error();
+string getFilePath();
+
+int main(int argc, char** argv){
+    if(argc == 4){
+        mainStop = atoi(argv[1]);
+        childFirstStop = atoi(argv[2]);
+        childSecondStop = atoi(argv[3]);
     }
 
-    file.close();
-}
+    string filePath = getFilePath();
 
-void main_process(){
-    output_in_file("Родитель");
-}
-
-void child1_process(){
-    output_in_file("Потомок 1");
-}
-
-void child2_process(){
-    const char *child2_program_path = "/home/peunov/highschool/opp-linux/laba1.2/cmake-build-debug/laba1_2";
-    output_in_file("Потомок 2");
-    execlp(child2_program_path, NULL);
-}
-
-int error(){
-    cout << "При создании процесса произошла ошибка";
-    return 1;
-}
-
-int spawning_processes(){
     pid_t fork_process_id = fork();
 
     if(fork_process_id == -1){
         return error();
     }
 
-    if(fork_process_id > 0){
-        sleep(5);
-        child1_process();
+    if(fork_process_id == 0){
+        sleep(childFirstStop);
+        outputInFile("Потомок 1", filePath, childFirstStop);
+        exit(EXIT_SUCCESS);
     }
 
-    if(fork_process_id == 0){
+    if(fork_process_id > 0){
         pid_t vfork_process_id = vfork();
 
         if(vfork_process_id == -1){
@@ -66,24 +44,51 @@ int spawning_processes(){
         }
 
         if(vfork_process_id > 0){
-            sleep(3);
-            child2_process();
+            sleep(mainStop);
+            outputInFile("Родитель", filePath, mainStop);
+            exit(EXIT_SUCCESS);
         }
 
         if(vfork_process_id == 0){
-            sleep(10);
-            int status;
-            wait(&status);
-            main_process();
+            sleep(childSecondStop);
+            outputInFile("Потомок 2", filePath, childSecondStop);
+            execlp(childFirstProgramPath, nullptr);
+            exit(EXIT_SUCCESS);
         }
     }
 
     return 0;
 }
 
-int main(){
-    cout << "Лабораторная работа №3" << endl;
-    return spawning_processes();
+void outputInFile(string processName, string filePath, int stop){
+    ofstream file;
+    file.open(filePath, ios::app);
+
+    if (file.is_open()) {
+        pid_t process_id = getpid();
+        file << processName << " - задержка: " << stop << endl;
+        file << processName << " - идентификатор процесса: " <<  process_id << endl;
+        file << processName << " - идентификатор предка: " << getppid() << endl;
+        file << processName << " - идентификатор сессии процесса: " << getsid(process_id) << endl;
+        file << processName << " - идентификатор группы процессов: " << getpgid(process_id) << endl;
+        file << processName << " - реальный идентификатор пользователя: " << getuid() << endl;
+        file << processName << " - эффективный идентификатор пользователя: " << geteuid() << endl;
+        file << processName << " - реальный групповой идентификатор: " << getgid() << endl;
+        file << processName << " - эффективный групповой идентификатор: " << getegid() << endl;
+    }
+
+    file.close();
 }
 
 
+int error(){
+    cout << "При создании процесса произошла ошибка";
+    return 1;
+}
+
+string getFilePath(){
+    string filePath;
+    cout << "Введите путь к файлу: ";
+    cin >> filePath;
+    return filePath;
+}

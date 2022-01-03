@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/peunov/highschool/opp-linux/lr7/child/main.cpp
+cstdio
+-
+cstdlib
+-
+unistd.h
+-
+csignal
+-
+iostream
+-
+fstream
+-
+

@@ -1,4 +1,4 @@
-/opt/clion-2021.2.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" /home/peunov/highschool/opp-linux/laba1.2
+/opt/clion-2021.2.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" /home/peunov/highschool/opp-linux/lr3/laba1.2
 -- The C compiler identification is GNU 9.3.0
 -- The CXX compiler identification is GNU 9.3.0
 -- Detecting C compiler ABI info
@@ -13,4 +13,4 @@
 -- Detecting CXX compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/peunov/highschool/opp-linux/laba1.2/cmake-build-debug
+-- Build files have been written to: /home/peunov/highschool/opp-linux/lr3/laba1.2/cmake-build-debug

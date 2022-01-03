@@ -1,0 +1,3 @@
+/home/peunov/highschool/opp-linux/lr10/writer/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/peunov/highschool/opp-linux/lr10/writer/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/peunov/highschool/opp-linux/lr10/writer/cmake-build-debug/CMakeFiles/writer.dir
